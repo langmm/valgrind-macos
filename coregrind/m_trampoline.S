@@ -1182,6 +1182,12 @@ VG_(trampoline_stuff_end):
 .fill 2048, 2, 0x0b0f /* `ud2` */
 
 
+/*---------------- arm64-darwin ----------------*/
+#else
+#if defined(VGP_arm64_darwin)
+
+#error unimplemented
+
 /*---------------- s390x-linux ----------------*/
 #else
 #if defined(VGP_s390x_linux)
@@ -1615,6 +1621,7 @@ VG_(trampoline_stuff_end):
 #else
 #  error Unknown platform
 
+#endif
 #endif
 #endif
 #endif

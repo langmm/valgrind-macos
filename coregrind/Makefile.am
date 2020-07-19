@@ -379,6 +379,7 @@ COREGRIND_SOURCES_COMMON = \
 	m_dispatch/dispatch-nanomips-linux.S \
 	m_dispatch/dispatch-x86-darwin.S \
 	m_dispatch/dispatch-amd64-darwin.S \
+	m_dispatch/dispatch-arm64-darwin.S \
 	m_dispatch/dispatch-x86-solaris.S \
 	m_dispatch/dispatch-amd64-solaris.S \
 	m_gdbserver/inferiors.c \
@@ -408,6 +409,7 @@ COREGRIND_SOURCES_COMMON = \
 	m_mach/mach_msg.c \
 	m_mach/mach_traps-x86-darwin.S \
 	m_mach/mach_traps-amd64-darwin.S \
+	m_mach/mach_traps-arm64-darwin.S \
 	m_mach/mig_strncpy.c \
 	m_replacemalloc/replacemalloc_core.c \
 	m_scheduler/sched-lock.c \
@@ -427,6 +429,7 @@ COREGRIND_SOURCES_COMMON = \
 	m_sigframe/sigframe-nanomips-linux.c \
 	m_sigframe/sigframe-x86-darwin.c \
 	m_sigframe/sigframe-amd64-darwin.c \
+	m_sigframe/sigframe-arm64-darwin.c \
 	m_sigframe/sigframe-solaris.c \
 	m_syswrap/syscall-x86-linux.S \
 	m_syswrap/syscall-amd64-linux.S \
@@ -440,7 +443,7 @@ COREGRIND_SOURCES_COMMON = \
 	m_syswrap/syscall-mips64-linux.S \
 	m_syswrap/syscall-nanomips-linux.S \
 	m_syswrap/syscall-x86-darwin.S \
-	m_syswrap/syscall-amd64-darwin.S \
+	m_syswrap/syscall-arm64-darwin.S \
 	m_syswrap/syscall-x86-solaris.S \
 	m_syswrap/syscall-amd64-solaris.S \
 	m_syswrap/syswrap-main.c \
@@ -461,6 +464,7 @@ COREGRIND_SOURCES_COMMON = \
 	m_syswrap/syswrap-nanomips-linux.c \
 	m_syswrap/syswrap-x86-darwin.c \
 	m_syswrap/syswrap-amd64-darwin.c \
+	m_syswrap/syswrap-arm64-darwin.c \
 	m_syswrap/syswrap-xen.c \
 	m_syswrap/syswrap-x86-solaris.c \
 	m_syswrap/syswrap-amd64-solaris.c \

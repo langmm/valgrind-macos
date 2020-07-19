@@ -74,7 +74,7 @@
 #  include "vki/vki-scnums-shared-linux.h"
 #  include "vki/vki-scnums-mips64-linux.h"
 
-#elif defined(VGP_x86_darwin) || defined(VGP_amd64_darwin)
+#elif defined(VGP_x86_darwin) || defined(VGP_amd64_darwin) || defined(VGP_arm64_darwin)
 #  include "vki/vki-scnums-darwin.h"
 
 #elif defined(VGP_x86_solaris) || (VGP_amd64_solaris)
