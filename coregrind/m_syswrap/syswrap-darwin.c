@@ -10010,6 +10010,26 @@ PRE(readlinkat)
         POST_MEM_WRITE( ARG3, RES );
 }
 
+PRE(mkdirat)
+{
+   *flags |= SfMayBlock;
+   PRINT("sys_mkdirat ( %ld, %#" FMT_REGWORD "x(%s), %ld )",
+         SARG1, ARG2, (HChar*)(Addr)ARG2, SARG3);
+   PRE_REG_READ3(long, "mkdirat",
+                 int, dfd, const char *, pathname, int, mode);
+   PRE_MEM_RASCIIZ( "mkdirat(pathname)", ARG2 );
+   if (ML_(safe_to_deref)( (void*)(Addr)ARG2, 1 )
+       && *(Char *)(Addr)ARG2 != '/'
+       && ((Int)ARG1) != ((Int)VKI_AT_FDCWD)
+       && !ML_(fd_allowed)(ARG1, "mkdirat", tid, False))
+      SET_STATUS_Failure( VKI_EBADF );
+}
+
+POST(mkdirat)
+{
+   vg_assert(SUCCESS);
+}
+
 PRE(bsdthread_ctl)
 {
    // int bsdthread_ctl(user_addr_t cmd, user_addr_t arg1,
@@ -10496,16 +10516,6 @@ PRE(kernelrpc_mach_port_get_attributes_trap)
  ------------------------------------------------------------------ */
 
 #if DARWIN_VERS >= DARWIN_10_15
-
-PRE(mkdirat)
-{
-   *flags |= SfMayBlock;
-   PRINT("sys_mkdirat ( %ld, %#" FMT_REGWORD "x(%s), %ld )",
-         SARG1, ARG2, (HChar*)(Addr)ARG2, SARG3);
-   PRE_REG_READ3(long, "mkdirat",
-                 int, dfd, const char *, pathname, int, mode);
-   PRE_MEM_RASCIIZ( "mkdirat(pathname)", ARG2 );
-}
 
 PRE(task_restartable_ranges_register)
 {
@@ -11277,6 +11287,7 @@ const SyscallTableEntry ML_(syscall_table)[] = {
    MACX_(__NR_faccessat,           faccessat),          // 466
    MACXY(__NR_fstatat64,           fstatat64),          // 470
    MACX_(__NR_readlinkat,          readlinkat),         // 473
+   MACXY(__NR_mkdirat,             mkdirat),            // 475
    MACX_(__NR_bsdthread_ctl,       bsdthread_ctl),      // 478
    MACXY(__NR_csrctl,              csrctl),             // 483
    MACX_(__NR_guarded_open_dprotected_np, guarded_open_dprotected_np),  // 484
